@@ -181,6 +181,9 @@
         },
         "body_scale": {
           "label": "Font size scale"
+        },
+        "header_menu_active_color": {
+          "label": "Enable Header Menu Active"
         }
       }
     },

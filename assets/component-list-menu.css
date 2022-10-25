@@ -16,6 +16,7 @@
 .list-menu__item--active {
   text-decoration: underline;
   text-underline-offset: 0.3rem;
+  color: rgb(47, 150, 45);
 }
 
 .list-menu__item--active:hover {
@@ -28,3 +29,5 @@
   width: 10rem;
   padding: 0.5rem;
 }
+
+

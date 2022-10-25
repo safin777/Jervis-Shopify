@@ -94,6 +94,12 @@
         "content": "t:settings_schema.typography.settings.header__1.content"
       },
       {
+        "type": "checkbox",
+        "id": "header_menu_active_enabled",
+        "label": "t:settings_schema.typography.settings.header_menu_active_color.label",
+        "default": true
+      },
+      {
         "type": "font_picker",
         "id": "type_header_font",
         "default": "assistant_n4",

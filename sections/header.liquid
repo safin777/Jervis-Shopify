@@ -763,6 +763,12 @@
   </script>
 {%- endif -%}
 
+<style>
+  .list-menu.list-menu--inline li:first-child a span {
+    color: green !important;
+  }
+</style>
+
 {% schema %}
 {
   "name": "t:sections.header.name",
@@ -929,6 +935,7 @@
       "label": "t:sections.all.padding.padding_bottom",
       "default": 20
     }
+    
   ]
 }
 {% endschema %}
