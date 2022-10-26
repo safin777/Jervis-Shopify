@@ -2,13 +2,50 @@
   "sections": {
     "main": {
       "type": "main-404",
-      "settings": {}
+      "settings": {
+        "title": "404-Page Not Found",
+        "subtext": "Oops, it looks like the page you are looking for is no longer here...",
+        "after_break": "Choose one of the links below or",
+        "link": "click here to return home."
+      }
     },
-
-    "customBanner": {
-      "type":"custom-banner",
-      "settings": {}
+    "2e822eb5-6f92-4916-a0b5-1e731be02165": {
+      "type": "custom-banner",
+      "blocks": {
+        "template--16614622822633__2e822eb5-6f92-4916-a0b5-1e731be02165-1666799501b75502d2-0": {
+          "type": "heading",
+          "settings": {
+            "inner-section-heading": "<p>Add your Headline<\/p>",
+            "text_padding_top": 20,
+            "text_padding_bottom": 20,
+            "heading_size": "h1"
+          }
+        },
+        "template--16614622822633__2e822eb5-6f92-4916-a0b5-1e731be02165-1666799501b75502d2-1": {
+          "type": "button",
+          "settings": {
+            "button_label": "Add Something",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "template--16614622822633__2e822eb5-6f92-4916-a0b5-1e731be02165-1666799501b75502d2-0",
+        "template--16614622822633__2e822eb5-6f92-4916-a0b5-1e731be02165-1666799501b75502d2-1"
+      ],
+      "settings": {
+        "banner_background_image": "shopify:\/\/shop_images\/silhouetted-couples-look-out-at-a-city-at-night.jpg",
+        "section-width": 900,
+        "section-height": 70,
+        "inner-section-opacity": 0.8,
+        "padding_top": 20,
+        "padding_bottom": 20,
+        "inner-section-content-alignment": "center"
+      }
     }
   },
-  "order": ["main, customBanner"]
+  "order": [
+    "main",
+    "2e822eb5-6f92-4916-a0b5-1e731be02165"
+  ]
 }
