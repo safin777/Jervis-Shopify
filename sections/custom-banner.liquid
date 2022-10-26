@@ -1,0 +1,215 @@
+<section>
+  <div class="cm-main-body">
+
+    <div class="cm-inner-container">
+      <h2>Hello man
+      </h2>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .cm-main-body {
+    padding: 0 0 20px;
+    width: {{ section.settings.section-width }}px;
+    height: {{ section.settings.section-height }}vh;
+    margin: 20px auto;
+    z-index: 1;
+    justify-content: center;
+
+  }
+  .cm-main-body {
+    background-image: url('{{ section.settings.banner_background_image | img_url: 'master' }}');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .cm-inner-container {
+    display: block;
+
+    background-color: white;
+    opacity: .6;
+    color: black;
+    z-index: 4;
+  }
+</style>
+
+
+{% schema %}
+  {
+    "name": "Custom Banner",
+    "settings": [
+
+      // image picker 
+      {
+        "type": "image_picker",
+        "id": "banner_background_image",
+        "label": "Set Background Image"
+      },
+
+// main body width control
+      {
+        "type": "range",
+        "id": "section-width",
+        "min": 300,
+        "max": 1200,
+        "step": 50,
+        "unit": "px",
+        "label": "Section Width",
+        "default": 900
+
+      },
+
+// main body height control
+      {
+        "type": "range",
+        "id": "section-height",
+        "min": 30,
+        "max": 100,
+        "step": 10,
+        "unit": "vh",
+        "label": "Section Height",
+        "default": 70
+
+      },
+      {
+        "type": "range",
+        "id": "inner-section-opacity",
+        "min": 0.1,
+        "max": 1.0,
+        "step": 0.1,
+        "unit": "%",
+        "label": "Inner Section Opacity",
+        "default": 0.8
+
+      }, {
+        "type": "range",
+        "id": "padding_top",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "Inner Section Padding Top",
+        "default": 20
+      }, {
+        "type": "range",
+        "id": "padding_bottom",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "Inner Section Padding Bottom",
+        "default": 20
+      }, {
+        "type": "select",
+        "id": "inner-section-content-alignment",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          }, {
+            "value": "center",
+            "label": "Center"
+          }, {
+            "value": "right",
+            "label": "Right"
+          }
+        ],
+        "default": "center",
+        "label": "Content Alignment"
+      }
+    ],
+
+    "blocks": [
+      {
+        "type": "heading",
+        "name": "Headline",
+        "settings": [
+          {
+            "type": "richtext",
+            "id": "inner-section-heading",
+            "default": "<p>Add your Headline</p>",
+            "label": "Headline"
+
+          }, {
+            "type": "range",
+            "id": "text_padding_top",
+            "min": 0,
+            "max": 100,
+            "step": 4,
+            "unit": "px",
+            "label": "Inner Section Padding Top",
+            "default": 20
+          }, {
+            "type": "range",
+            "id": "text_padding_bottom",
+            "min": 0,
+            "max": 100,
+            "step": 4,
+            "unit": "px",
+            "label": "Inner Section Padding Bottom",
+            "default": 20
+          }, {
+            "type": "select",
+            "id": "heading_size",
+            "options": [
+              {
+                "value": "h2",
+                "label": "Small"
+
+              }, {
+                "value": "h1",
+                "label": "Medium"
+
+              }, {
+                "value": "h0",
+                "label": "Large"
+
+              }, {
+                "value": "hxl",
+                "label": "Xtra Large"
+
+              }
+            ],
+            "default": "h1",
+            "label": "Font Size"
+          }
+
+        ]
+      }, {
+        "type": "button",
+        "name": "Button",
+        "settings": [
+          {
+            "type": "text",
+            "id": "button_label",
+            "default": "Add Something",
+            "label": "Button Text"
+          }, {
+            "type": "url",
+            "id": "button_link",
+            "label": "Button Url"
+          }
+        ]
+      }
+
+    ],
+    "presets": [
+      {
+        "category": "content",
+        "name": "Custom Banner",
+        "blocks": [
+          {
+            "type": "heading"
+          }, {
+            "type": "button"
+          }
+        ]
+
+
+      }
+    ]
+  }
+{% endschema %}

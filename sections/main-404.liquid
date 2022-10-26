@@ -1,151 +1,155 @@
 {%- style -%}
 
-:root {
-  --heading-font-family: "Beirut Display", serif;
-  --heading-font-weight: 500;
-  --heading-font-style: normal;
-  --text-color: #333333;
-}
-@media screen and (min-width: 1140px) {
-  .Container {
-    padding: 0 80px;
+  :root {
+    --heading-font-family: "Beirut Display", serif;
+    --heading-font-weight: 500;
+    --heading-font-style: normal;
+    --text-color: #333333;
   }
-}
-
-@media screen and (min-width: 641px) {
-  .Container {
-    padding: 0 50px;
+  @media screen and (min-width: 1140px) {
+    .Container {
+      padding: 0 80px;
+    }
   }
-}
 
-.Container {
-  margin: 0 auto;
-  padding: 0 24px;
-}
-
-.empty-page-header {
-  text-align: center;
-  margin: 30px 0;
-}
-.u-h3 {
-  font-family: var(--heading-font-family);
-}
-
-.Heading {
-  font-family: var(--heading-font-family);
-  font-weight: var(--heading-font-weight);
-  font-style: var(--heading-font-style);
-  color: var(--heading-color);
-  transition: color 0.2s ease-in-out;
-}
-.p__text {
-  text-align: center;
-  display: block;
-  margin-block-start: 0 !important;
-  margin-block-end: 0 !important;
-  margin-inline-start: 0;
-  margin-inline-end: 0;
-  line-height: 1.5;
-}
-
-.link_text {
-  color: #333333;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 1.5;
-  transition: color 0.2s ease-in-out;
-}
-
-.image__section {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: center;
-}
-
-.image__item {
-  margin-left: 30px;
-}
-
-.pad_2 {
-  padding: 10px 30px;
-}
-
-
-}
-{%- endstyle -%}<section class="Container">
-<div class="empty-page-header">
-  <h1 class="EmptyState__Title Heading u-h3">
-    {{ section.settings.title }}
-  </h1>
-  {{ section.settings.image_p | img_url:"large" | img_tag: section.settings.title }}
-  <p class="p__text">{{ section.settings.subtext }}
-    <br>
-    {{ section.settings.after_break }}
-    &nbsp;
-    <a class="link_text" href="#">{{ section.settings.link }}
-    </a>
-  </p>
-</div>
-
-<div class="image__section">
-  {% for block in section.blocks %}
-    <div class="image__item">
-      {{ block.settings.image_slider_one | img_url:"316x316" | img_tag: block.settings.title }}
-      <p class="p__text pad_2">{{ block.settings.title_slider_one }}
-      </p>
-    </div>
-  {% endfor %}
-</div></section>{% schema %}
-{
-  "name": "main-404",
-  "settings": [
-    {
-      "type": "text",
-      "id": "title",
-      "label": "Title",
-      "default": "404-Page Not Found"
-    },
-    {
-      "type": "text",
-      "id": "subtext",
-      "label": "Subtext",
-      "default": "Oops, it looks like the page you are looking for is no longer here..."
-    },
-    {
-      "type": "image_picker",
-      "id": "image_p",
-      "label": "image change"
-    },
-    {
-      "type": "text",
-      "id": "after_break",
-      "label": "after break text",
-      "default": "Choose one of the links below or"
-    }, {
-      "type": "text",
-      "id": "link",
-      "label": "link",
-      "default": "click here to return home."
+  @media screen and (min-width: 641px) {
+    .Container {
+      padding: 0 50px;
     }
-  ],
+  }
 
-  "blocks": [
-    {
-      "type": "image_block",
-      "name": "slider image",
-      "settings": [
-        {
-          "type": "image_picker",
-          "id": "image_slider_one",
-          "label": "image one"
-        }, {
-          "type": "text",
-          "id": "title_slider_one",
-          "label": "title one"
-        }
-      ]
-    }
-  ]
+  .Container {
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .empty-page-header {
+    text-align: center;
+    margin: 30px 0;
+  }
+  .u-h3 {
+    font-family: var(--heading-font-family);
+  }
+
+  .Heading {
+    font-family: var(--heading-font-family);
+    font-weight: var(--heading-font-weight);
+    font-style: var(--heading-font-style);
+    color: var(--heading-color);
+    transition: color 0.2s ease-in-out;
+  }
+  .p__text {
+    text-align: center;
+    display: block;
+    margin-block-start: 0 !important;
+    margin-block-end: 0 !important;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+    line-height: 1.5;
+  }
+
+  .link_text {
+    color: #333333;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.5;
+    transition: color 0.2s ease-in-out;
+  }
+
+  .image__section {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .image__item {
+    margin-left: 30px;
+  }
+
+  .pad_2 {
+    padding: 10px 30px;
+  }
+
+
 }
+{%- endstyle -%}
+<section class="Container">
+  <div class="empty-page-header">
+    <h1 class="EmptyState__Title Heading u-h3">
+      {{ section.settings.title }}
+    </h1>
+    {{ section.settings.image_p | img_url:"large" | img_tag: section.settings.title }}
+    <p class="p__text">{{ section.settings.subtext }}
+      <br>
+      {{ section.settings.after_break }}
+      &nbsp;
+      <a class="link_text" href="#">{{ section.settings.link }}
+      </a>
+    </p>
+  </div>
+
+  <div class="image__section">
+    {% for block in section.blocks %}
+      <div class="image__item">
+        {{ block.settings.image_slider_one | img_url:"316x316" | img_tag: block.settings.title }}
+        <p class="p__text pad_2">{{ block.settings.title_slider_one }}
+        </p>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+{% schema %}
+  {
+    "name": "main-404",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "404-Page Not Found"
+      },
+      {
+        "type": "text",
+        "id": "subtext",
+        "label": "Subtext",
+        "default": "Oops, it looks like the page you are looking for is no longer here..."
+      },
+      {
+        "type": "image_picker",
+        "id": "image_p",
+        "label": "image change"
+      },
+      {
+        "type": "text",
+        "id": "after_break",
+        "label": "after break text",
+        "default": "Choose one of the links below or"
+      }, {
+        "type": "text",
+        "id": "link",
+        "label": "link",
+        "default": "click here to return home."
+      }
+    ],
+
+    
+    "blocks": [
+      {
+        "type": "image_block",
+        "name": "slider image",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image_slider_one",
+            "label": "image one"
+          }, {
+            "type": "text",
+            "id": "title_slider_one",
+            "label": "title one"
+          }
+        ]
+      }
+    ]
+  }
 {% endschema %}
