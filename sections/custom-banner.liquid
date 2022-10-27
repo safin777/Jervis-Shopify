@@ -1,28 +1,28 @@
 <section>
   <div class="cm-main-body">
-
-    <div class="cm-inner-container">
-      <div class="title-address">
-        <p>
-          {{ section.settings.inner_address }}
-        </p>
-        <h1>{{ section.settings.inner_title }}
-        </h2>
+    {% if  section.settings.show_inner_section  %}
+      <div class="cm-inner-container">
+        <div class="title-address">
+          <p>
+            {{ section.settings.inner_address }}
+          </p>
+          <h1>{{ section.settings.inner_title }}
+          </h2>
+        </div>
+        <div class="time-title">
+          {%- for item in section.blocks -%}
+            {% if item.type == "text" %}
+              <p>
+                {{ item.settings.time_title }}
+              </p>
+            {% endif %}
+          {%- endfor -%}
+        </div>
+        <div class="shop-btn">
+          <a href="{{ section.settings.btn_url }}">Shop Now</a>
+        </div>
       </div>
-      <div class="time-title">
-        {%- for item in section.blocks -%}
-          {% if item.type == "text" %}
-            <p>
-              {{ item.settings.time_title }}
-            </p>
-          {% endif %}
-        {%- endfor -%}
-      </div>
-      <div class="shop-btn">
-        <a href="{{ section.settings.btn_url }}">Shop Now</a>
-      </div>
-    </div>
-
+    {% endif %}
   </div>
 </section>
 
@@ -32,7 +32,6 @@
     width: {{ section.settings.section-width }}px;
     height: {{ section.settings.section-height }}vh;
     margin: 20px auto;
-    z-index: 1;
     justify-content: center;
     flex-direction: column;
     align-items: center;
@@ -50,10 +49,9 @@
     display: block;
     height: {{ section.settings.cm-inner-height }}px;
     width: {{ section.settings.cm-inner-width }}px;
-    background-color: white;
+    background-color: {{ section.settings.inner-container_bg_color }};
     opacity: {{ section.settings.background_opacity }};
     color: black;
-    z-index: 4;
     margin: 0 auto;
     text-align: center;
     color: {{ section.settings.section_color }} !important;
@@ -69,7 +67,7 @@
     padding: 10px 20px;
     border-radius: 5px;
     text-decoration: none;
-    z-index: 7;
+
   }
 </style>
 
@@ -79,8 +77,6 @@
     "name": "Custom Banner",
     "settings": [
 
-
-
       // image picker 
       {
         "type": "image_picker",
@@ -88,6 +84,14 @@
         "label": "Set Background Image"
       },
 
+// show inner section 
+
+      {
+        "type": "checkbox",
+        "id": "show_inner_section",
+        "label": "Show Inner Section",
+        "default": true
+      },
 
 
 // adding address 
@@ -212,14 +216,35 @@
         "label": "Button Color"
       },
 
+// change inner conatiner background  color
+      {
+        "type": "select",
+        "id": "inner-container_bg_color",
+        "options": [
+          {
+            "value": "#D6E282",
+            "label": "Light Yellow"
+          }, {
+            "value": "#fff",
+            "label": "white"
+          }, {
+            "value": "#BCE29E",
+            "label": "Light Green"
+          }, {
+            "value": "#E282D6",
+            "label": "Violate"
+          }
+        ],
+        "default": "#E282D6",
+        "label": "Container Background Color"
+      },
+
 // change url 
       {
         "type": "url",
         "id": "btn_url",
         "label": "Add Button URL"
       }
-
-
     ],
 
     "blocks": [
