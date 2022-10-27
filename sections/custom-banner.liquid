@@ -2,8 +2,25 @@
   <div class="cm-main-body">
 
     <div class="cm-inner-container">
-      <h2>Hello man
-      </h2>
+      <div class="title-address">
+        <p>
+          {{ section.settings.inner_address }}
+        </p>
+        <h1>{{ section.settings.inner_title }}
+        </h2>
+      </div>
+      <div class="time-title">
+        {%- for item in section.blocks -%}
+          {% if item.type == "text" %}
+            <p>
+              {{ item.settings.time_title }}
+            </p>
+          {% endif %}
+        {%- endfor -%}
+      </div>
+      <div class="shop-btn">
+        <a href="{{ section.settings.btn_url }}">Shop Now</a>
+      </div>
     </div>
 
   </div>
@@ -11,12 +28,15 @@
 
 <style>
   .cm-main-body {
-    padding: 0 0 20px;
+    display: flex;
     width: {{ section.settings.section-width }}px;
     height: {{ section.settings.section-height }}vh;
     margin: 20px auto;
     z-index: 1;
     justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
 
   }
   .cm-main-body {
@@ -28,11 +48,28 @@
 
   .cm-inner-container {
     display: block;
-
+    height: {{ section.settings.cm-inner-height }}px;
+    width: {{ section.settings.cm-inner-width }}px;
     background-color: white;
-    opacity: .6;
+    opacity: {{ section.settings.background_opacity }};
     color: black;
     z-index: 4;
+    margin: 0 auto;
+    text-align: center;
+    color: {{ section.settings.section_color }} !important;
+  }
+
+  .cm-inner-container h1 {
+    margin-top: 10px !important;
+    color: {{ section.settings.section_color }} !important;
+  }
+  .shop-btn a {
+    background-color: {{ section.settings.btn_color }};
+    color: white !important;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    z-index: 7;
   }
 </style>
 
@@ -42,11 +79,44 @@
     "name": "Custom Banner",
     "settings": [
 
+
+
       // image picker 
       {
         "type": "image_picker",
         "id": "banner_background_image",
         "label": "Set Background Image"
+      },
+
+
+
+// adding address 
+      {
+        "type": "text",
+        "id": "inner_address",
+        "label": "Add Address",
+        "default": "67 Berwick Street, London, W1F 8GR"
+      },
+
+// adding title 
+      {
+        "type": "text",
+        "id": "inner_title",
+        "label": "Add Title",
+        "default": "Code For Children"
+      },
+
+// main body height control
+      {
+        "type": "range",
+        "id": "section-height",
+        "min": 30,
+        "max": 100,
+        "step": 10,
+        "unit": "vh",
+        "label": "Section Height",
+        "default": 70
+
       },
 
 // main body width control
@@ -62,135 +132,107 @@
 
       },
 
-// main body height control
+// background opacity
+
       {
         "type": "range",
-        "id": "section-height",
-        "min": 30,
-        "max": 100,
-        "step": 10,
-        "unit": "vh",
-        "label": "Section Height",
-        "default": 70
+        "id": "background_opacity",
+        "min": 0,
+        "max": 1,
+        "unit": "%",
+        "step": 0.1,
+        "label": "Background Opacity",
+        "default": 0.6
 
       },
+
+// inner container height control
       {
         "type": "range",
-        "id": "inner-section-opacity",
-        "min": 0.1,
-        "max": 1.0,
-        "step": 0.1,
-        "unit": "%",
-        "label": "Inner Section Opacity",
-        "default": 0.8
+        "id": "cm-inner-height",
+        "min": 100,
+        "max": 500,
+        "step": 50,
+        "unit": "px",
+        "label": "Inner Container Height",
+        "default": 250
 
-      }, {
+      },
+
+// inner container width control
+      {
         "type": "range",
-        "id": "padding_top",
-        "min": 0,
-        "max": 100,
-        "step": 4,
+        "id": "cm-inner-width",
+        "min": 100,
+        "max": 600,
+        "step": 50,
         "unit": "px",
-        "label": "Inner Section Padding Top",
-        "default": 20
-      }, {
-        "type": "range",
-        "id": "padding_bottom",
-        "min": 0,
-        "max": 100,
-        "step": 4,
-        "unit": "px",
-        "label": "Inner Section Padding Bottom",
-        "default": 20
-      }, {
+        "label": "Inner Container Width",
+        "default": 400
+
+      },
+
+// change text color
+      {
         "type": "select",
-        "id": "inner-section-content-alignment",
+        "id": "section_color",
         "options": [
           {
-            "value": "left",
-            "label": "Left"
+            "value": "#395144",
+            "label": "Dark Green"
           }, {
-            "value": "center",
-            "label": "Center"
+            "value": "#000",
+            "label": "black"
           }, {
-            "value": "right",
-            "label": "Right"
+            "value": "#BCE29E",
+            "label": "Light Green"
           }
         ],
-        "default": "center",
-        "label": "Content Alignment"
+        "default": "#000",
+        "label": "Text Color"
+      },
+
+// change button color
+      {
+        "type": "select",
+        "id": "btn_color",
+        "options": [
+          {
+            "value": "#395144",
+            "label": "Dark Green"
+          }, {
+            "value": "#000",
+            "label": "black"
+          }, {
+            "value": "#BCE29E",
+            "label": "Light Green"
+          }
+        ],
+        "default": "#000",
+        "label": "Button Color"
+      },
+
+// change url 
+      {
+        "type": "url",
+        "id": "btn_url",
+        "label": "Add Button URL"
       }
+
+
     ],
 
     "blocks": [
+
       {
-        "type": "heading",
-        "name": "Headline",
-        "settings": [
-          {
-            "type": "richtext",
-            "id": "inner-section-heading",
-            "default": "<p>Add your Headline</p>",
-            "label": "Headline"
-
-          }, {
-            "type": "range",
-            "id": "text_padding_top",
-            "min": 0,
-            "max": 100,
-            "step": 4,
-            "unit": "px",
-            "label": "Inner Section Padding Top",
-            "default": 20
-          }, {
-            "type": "range",
-            "id": "text_padding_bottom",
-            "min": 0,
-            "max": 100,
-            "step": 4,
-            "unit": "px",
-            "label": "Inner Section Padding Bottom",
-            "default": 20
-          }, {
-            "type": "select",
-            "id": "heading_size",
-            "options": [
-              {
-                "value": "h2",
-                "label": "Small"
-
-              }, {
-                "value": "h1",
-                "label": "Medium"
-
-              }, {
-                "value": "h0",
-                "label": "Large"
-
-              }, {
-                "value": "hxl",
-                "label": "Xtra Large"
-
-              }
-            ],
-            "default": "h1",
-            "label": "Font Size"
-          }
-
-        ]
-      }, {
-        "type": "button",
-        "name": "Button",
+        "type": "text",
+        "name": "Time Title",
         "settings": [
           {
             "type": "text",
-            "id": "button_label",
-            "default": "Add Something",
-            "label": "Button Text"
-          }, {
-            "type": "url",
-            "id": "button_link",
-            "label": "Button Url"
+            "id": "time_title",
+            "label": "Time Title",
+            "default": "Mon - Fri: 10:30am - 7:00pm"
           }
         ]
       }
@@ -202,9 +244,7 @@
         "name": "Custom Banner",
         "blocks": [
           {
-            "type": "heading"
-          }, {
-            "type": "button"
+            "type": "text"
           }
         ]
 
