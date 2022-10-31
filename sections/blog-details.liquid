@@ -1,0 +1,308 @@
+<style>
+
+  .blog-container {
+    width: 100%;
+    background-color: crimson;
+  }
+
+  .blog-header .blog-title {
+    text-align: center;
+    font-size: {{ section.settings.header_font_size }}px;
+    font-weight: bold;
+    color: {{ section.settings.header_font_color }};
+    padding: {{ section.settings.header_padding_TB }}px {{ section.settings.header_padding_LR }}px;
+  }
+
+  .blog-post-time {
+    margin-top: -50px;
+    text-align: center;
+    font-size: {{ section.settings.time_font_size }}px;
+    color: {{ section.settings.time_font_color }};
+    padding-bottom: {{ section.settings.time_padding_B }}px;
+    padding-left: {{ section.settings.time_padding_LR }}px;
+    padding-right: {{ section.settings.time_padding_LR }}px;
+  }
+
+  .blog-post-time a {
+    color: {{ section.settings.time_font_color }};
+  }
+
+
+</style>
+<section>
+  <div class="blog-container">
+    <div class="blog-header">
+      <h1 class="blog-title">{{ section.settings.header_title }}</h1>
+      <p class="blog-post-time">Posted on: 13/10/2022 – Words by Lizzie Posted in Integrity at
+        <a class="header-link" href="#">Wax</a>,<a class="header-link" href="#">Fabrics</a>
+        ,
+        <a class="header-link" href="#">Cool Stuff</a>
+      </p>
+    </div>
+    <div class="blog-para-one">
+      <p class="para-bold"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eu euismod ante, quis finibus odio. Aenean scelerisque consectetur pharetra. In condimentum est eu eros malesuada aliquam.</p>
+      {%- comment -%} ___________blog-para-one block________ {%- endcomment -%}
+      {%- for item in section.blocks -%}
+        {% if item.type == "text" %}
+         <p class="para-thin">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eu euismod ante, quis finibus odio. Aenean scelerisque consectetur pharetra. In condimentum est eu eros malesuada aliquam. </p>
+        {% endif %}
+      {% endfor %}
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Blog",
+    "settings": [
+
+      // _________________________HEADER PART SETTINGS_________________________________ 
+
+// Header title add 
+      {
+        "type": "text",
+        "id": "header_title",
+        "label": "Header Title",
+        "default": "Journal Title, It’s A Pretty Long One Too."
+      },
+
+// header title font size
+      {
+        "type": "range",
+        "id": "header_font_size",
+        "min": 30,
+        "max": 80,
+        "step": 5,
+        "unit": "px",
+        "label": "Header Title Font Size",
+        "default": 50
+      },
+
+// header title padding bottom 
+      {
+        "type": "range",
+        "id": "header_padding_TB",
+        "min": 0,
+        "max": 100,
+        "step": 10,
+        "unit": "px",
+        "label": "Header Title Padding Bottom",
+        "default": 50
+      },
+
+// header title padding left-right 
+      {
+        "type": "range",
+        "id": "header_padding_LR",
+        "min": 0,
+        "max": 500,
+        "step": 50,
+        "unit": "px",
+        "label": "Header Title Padding Left-Right",
+        "default": 250
+      },
+
+// header font color select
+      {
+        "type": "select",
+        "id": "header_font_color",
+        "options": [
+          {
+            "value": "#395144",
+            "label": "Dark Green"
+          }, {
+            "value": "#000",
+            "label": "black"
+          }, {
+            "value": "#BCE29E",
+            "label": "Light Green"
+          }, {
+            "value": "#fff",
+            "label": "white"
+          }
+        ],
+        "default": "#000",
+        "label": "Header Font Color"
+      },
+
+// _________________________TIME PART SETTINGS_________________________________
+
+// time font size
+      {
+        "type": "range",
+        "id": "time_font_size",
+        "min": 10,
+        "max": 30,
+        "step": 5,
+        "unit": "px",
+        "label": "Time Font Size",
+        "default": 15
+      },
+
+// time padding top-bottom 
+      {
+        "type": "range",
+        "id": "time_padding_B",
+        "min": 0,
+        "max": 300,
+        "step": 10,
+        "unit": "px",
+        "label": "Time Padding Bottom",
+        "default": 100
+      },
+
+// time padding left-right 
+      {
+        "type": "range",
+        "id": "time_padding_LR",
+        "min": 0,
+        "max": 400,
+        "step": 50,
+        "unit": "px",
+        "label": "Time Padding Left-Right",
+        "default": 250
+      },
+
+// time font color select
+      {
+        "type": "select",
+        "id": "time_font_color",
+        "options": [
+          {
+            "value": "#395144",
+            "label": "Dark Green"
+          }, {
+            "value": "#000",
+            "label": "black"
+          }, {
+            "value": "#BCE29E",
+            "label": "Light Green"
+          }, {
+            "value": "#fff",
+            "label": "white"
+          }
+        ],
+        "default": "#000",
+        "label": "Time Font Color"
+      },
+
+// image picker 
+      {
+        "type": "image_picker",
+        "id": "banner_background_image",
+        "label": "Set Background Image"
+      },
+
+// show inner section 
+
+      {
+        "type": "checkbox",
+        "id": "show_inner_section",
+        "label": "Show Inner Section",
+        "default": true
+      },
+
+// adding title 
+      {
+        "type": "text",
+        "id": "inner_title",
+        "label": "Add Title",
+        "default": "Code For Children"
+      },
+
+// main body height control
+      {
+        "type": "range",
+        "id": "section-height",
+        "min": 30,
+        "max": 100,
+        "step": 10,
+        "unit": "vh",
+        "label": "Section Height",
+        "default": 70
+
+      },
+
+// change text color
+      {
+        "type": "select",
+        "id": "section_color",
+        "options": [
+          {
+            "value": "#395144",
+            "label": "Dark Green"
+          }, {
+            "value": "#000",
+            "label": "black"
+          }, {
+            "value": "#BCE29E",
+            "label": "Light Green"
+          }
+        ],
+        "default": "#000",
+        "label": "Text Color"
+      },
+
+// change inner conatiner background  color
+      {
+        "type": "select",
+        "id": "inner-container_bg_color",
+        "options": [
+          {
+            "value": "#D6E282",
+            "label": "Light Yellow"
+          }, {
+            "value": "#fff",
+            "label": "white"
+          }, {
+            "value": "#BCE29E",
+            "label": "Light Green"
+          }, {
+            "value": "#E282D6",
+            "label": "Violate"
+          }
+        ],
+        "default": "#E282D6",
+        "label": "Container Background Color"
+      },
+
+// change url 
+      {
+        "type": "url",
+        "id": "btn_url",
+        "label": "Add Button URL"
+      }
+    ],
+
+    "blocks": [
+
+      {
+        "type": "text",
+        "name": "Paragraph Thin",
+        "settings": [
+          {
+            "type": "text",
+            "id": "para_thin",
+            "label": "Paragraph Thin",
+            "default": "Write a thin paragraph here."
+          }
+        ]
+      }
+
+    ],
+    "presets": [
+      {
+        "category": "content",
+        "name": "Blog",
+        "blocks": [
+          {
+            "type": "text"
+          }
+        ]
+
+
+      }
+    ]
+  }
+{% endschema %}
