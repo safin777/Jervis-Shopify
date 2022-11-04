@@ -18,5 +18,7 @@
     "titleBar.inactiveBackground": "#53890199",
     "titleBar.inactiveForeground": "#e7e7e799"
   },
-  "peacock.color": "#538901"
+  "peacock.color": "#538901",
+  "editor.fontFamily": "'Cascadia Code','CascadiaCodePL',Consolas",
+  "editor.fontLigatures": "'calt','ss01'"
 }

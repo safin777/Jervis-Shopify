@@ -1,5 +1,4 @@
 <style>
-
   .blog-container {
     width: 100%;
     background-color: crimson;
@@ -28,6 +27,41 @@
   }
 
 
+
+  .single_style_para {
+    text-align: center;
+  }
+
+  {% for block in section.blocks %}
+    .double_style_para-{{ block.id }}{
+      display: flex;
+      padding: 20px {{ block.settings.para_double_padding_LR }}px;
+      text-align: justify;
+      font-size: {{ block.settings.para_double_font_size }}px;
+      color: {{ block.settings.para_double_font_color }};
+    }
+  {% endfor %}
+  .d-para {
+    padding: 30px;
+  }
+
+  .para-bold {
+    text-align: justify;
+    letter-spacing: 0.2px;
+    line-height: 24px;
+    font-size: {{ section.settings.para_bold_font_size }}px;
+    font-weight: {{ section.settings.para_bold }};
+    padding: 0 {{ section.settings.para_padding_LR }}px;
+  }
+  
+  {% for block in section.blocks %}
+    #para-thin-{{ block.id }}{
+      padding: 0 {{ block.settings.para_thin_padding_LR }}px;
+      text-align: justify;
+      font-size: {{ block.settings.para_thin_font_size }}px;
+      color: {{ block.settings.para_thin_font_color }};
+    }
+  {% endfor %}
 </style>
 <section>
   <div class="blog-container">
@@ -39,16 +73,47 @@
         <a class="header-link" href="#">Cool Stuff</a>
       </p>
     </div>
-    <div class="blog-para-one">
-      <p class="para-bold"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eu euismod ante, quis finibus odio. Aenean scelerisque consectetur pharetra. In condimentum est eu eros malesuada aliquam.</p>
-      {%- comment -%} ___________blog-para-one block________ {%- endcomment -%}
+
+    {%- comment -%}
+      single para
+    {%- endcomment -%}
+    <div class="single_style_para">
+      <p class="para-bold">
+        {{ section.settings.para_richtext }}
+      </p>
+      {%- comment -%}
+        ___________single_style_para block________
+      {%- endcomment -%}
       {%- for item in section.blocks -%}
         {% if item.type == "text" %}
-         <p class="para-thin">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eu euismod ante, quis finibus odio. Aenean scelerisque consectetur pharetra. In condimentum est eu eros malesuada aliquam. </p>
+          <p class="para-thins" id="para-thin-{{item.id}}">
+            {{ item.settings.para_thin }}
+          </p>
         {% endif %}
       {% endfor %}
-
     </div>
+
+    {% for item in section.blocks %}
+      {% if item.type == "double_text" %}
+        {%- comment -%}
+          double para block
+        {%- endcomment -%}
+        <div class="double_style_para-{{item.id}}">
+          <div class="d-para">
+            <p>
+              {{ item.settings.para_left }}
+            </p>
+          </div>
+
+          <div class="d-para">
+            <p>
+              {{ item.settings.para_right }}
+            </p>
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+
   </div>
 </section>
 
@@ -187,84 +252,56 @@
         "label": "Time Font Color"
       },
 
-// image picker 
-      {
-        "type": "image_picker",
-        "id": "banner_background_image",
-        "label": "Set Background Image"
-      },
 
-// show inner section 
+// _________________________PARA PART SETTINGS_________________________________
 
-      {
-        "type": "checkbox",
-        "id": "show_inner_section",
-        "label": "Show Inner Section",
-        "default": true
-      },
-
-// adding title 
+// para richtext setting 
       {
         "type": "text",
-        "id": "inner_title",
-        "label": "Add Title",
-        "default": "Code For Children"
+        "id": "para_richtext",
+        "label": "Para Bold",
+        "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl vel tincidunt luctus, nisl nisl aliquam lorem, nec aliquam nisl nisl sit amet lorem. Sed euismod, nisl vel tincidunt luctus, nisl nisl aliquam lorem, nec aliquam nisl nisl sit amet lorem."
       },
 
-// main body height control
+// para_bold_font_size
       {
         "type": "range",
-        "id": "section-height",
-        "min": 30,
-        "max": 100,
-        "step": 10,
-        "unit": "vh",
-        "label": "Section Height",
-        "default": 70
-
+        "id": "para_bold_font_size",
+        "min": 10,
+        "max": 30,
+        "step": 5,
+        "unit": "px",
+        "label": "Paragraph Bold Font Size",
+        "default": 15
       },
 
-// change text color
+// para bold font weight
       {
         "type": "select",
-        "id": "section_color",
+        "id": "para_bold",
         "options": [
           {
-            "value": "#395144",
-            "label": "Dark Green"
+            "value": "bold",
+            "label": "Bold"
           }, {
-            "value": "#000",
-            "label": "black"
-          }, {
-            "value": "#BCE29E",
-            "label": "Light Green"
+            "value": "normal",
+            "label": "Normal"
           }
         ],
-        "default": "#000",
-        "label": "Text Color"
+        "default": "bold",
+        "label": "Para Bold Font Weight"
       },
 
-// change inner conatiner background  color
+// para bold padding left-right 
       {
-        "type": "select",
-        "id": "inner-container_bg_color",
-        "options": [
-          {
-            "value": "#D6E282",
-            "label": "Light Yellow"
-          }, {
-            "value": "#fff",
-            "label": "white"
-          }, {
-            "value": "#BCE29E",
-            "label": "Light Green"
-          }, {
-            "value": "#E282D6",
-            "label": "Violate"
-          }
-        ],
-        "default": "#E282D6",
-        "label": "Container Background Color"
+        "type": "range",
+        "id": "para_padding_LR",
+        "min": 0,
+        "max": 400,
+        "step": 50,
+        "unit": "px",
+        "label": "Paragraph-Bold Padding Left-Right",
+        "default": 250
       },
 
 // change url 
@@ -274,7 +311,6 @@
         "label": "Add Button URL"
       }
     ],
-
     "blocks": [
 
       {
@@ -286,7 +322,118 @@
             "id": "para_thin",
             "label": "Paragraph Thin",
             "default": "Write a thin paragraph here."
+          },
+
+// para thin padding LR
+          {
+            "type": "range",
+            "id": "para_thin_padding_LR",
+            "min": 0,
+            "max": 400,
+            "step": 50,
+            "unit": "px",
+            "label": "Paragraph-Thin Padding Left-Right",
+            "default": 250
+          },
+
+// para thin font color
+          {
+            "type": "select",
+            "id": "para_thin_font_color",
+            "options": [
+              {
+                "value": "#395144",
+                "label": "Dark Green"
+              }, {
+                "value": "#000",
+                "label": "black"
+              }, {
+                "value": "#BCE29E",
+                "label": "Light Green"
+              }, {
+                "value": "#fff",
+                "label": "white"
+              }
+            ],
+            "default": "#000",
+            "label": "Paragraph-Thin Font Color"
+          },
+
+// para thin font size
+          {
+            "type": "range",
+            "id": "para_thin_font_size",
+            "min": 10,
+            "max": 30,
+            "step": 2,
+            "unit": "px",
+            "label": "Paragraph-Thin Font Size",
+            "default": 14
           }
+        ]
+      }, {
+        "type": "double_text",
+        "name": "Double Paragraph",
+        "settings": [
+          {
+            "type": "text",
+            "id": "para_left",
+            "label": "Double Paragraph one",
+            "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl vel tincidunt luctus, nisl nisl aliquam lorem, nec aliquam nisl nisl sit amet lorem. Sed euismod, nisl vel tincidunt luctus, nisl nisl aliquam lorem, nec aliquam nisl nisl sit amet lorem.."
+          }, {
+            "type": "text",
+            "id": "para_right",
+            "label": "Double Paragraph two",
+            "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl vel tincidunt luctus, nisl nisl aliquam lorem, nec aliquam nisl nisl sit amet lorem. Sed euismod, nisl vel tincidunt luctus, nisl nisl aliquam lorem, nec aliquam nisl nisl sit amet lorem.."
+          },
+
+// para double padding LR
+          {
+            "type": "range",
+            "id": "para_double_padding_LR",
+            "min": 0,
+            "max": 200,
+            "step": 10,
+            "unit": "px",
+            "label": "Paragraph-Double Padding Left-Right",
+            "default": 20
+          },
+
+          // para double font color
+          {
+            "type": "select",
+            "id": "para_double_font_color",
+            "options": [
+              {
+                "value": "#395144",
+                "label": "Dark Green"
+              }, {
+                "value": "#000",
+                "label": "black"
+              }, {
+                "value": "#BCE29E",
+                "label": "Light Green"
+              }, {
+                "value": "#fff",
+                "label": "white"
+              }
+            ],
+            "default": "#000",
+            "label": "Paragraph-Double Font Color"
+          },
+
+          //para double font size
+          {
+            "type": "range",
+            "id": "para_double_font_size",
+            "min": 10,
+            "max": 40,
+            "step": 2,
+            "unit": "px",
+            "label": "Paragraph-Double Font Size",
+            "default": 14
+          }
+
         ]
       }
 
@@ -298,10 +445,10 @@
         "blocks": [
           {
             "type": "text"
+          }, {
+            "type": "double_text"
           }
         ]
-
-
       }
     ]
   }
