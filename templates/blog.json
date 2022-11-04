@@ -15,7 +15,12 @@
     "blog-posts": {
       "type": "blog-details",
       "settings": {}
+    },
+
+    "blog-image": {
+      "type": "blog-image",
+      "settings": {}
     }
   },
-  "order": ["main", "blog-posts"]
+  "order": ["main", "blog-posts", "blog-image"]
 }

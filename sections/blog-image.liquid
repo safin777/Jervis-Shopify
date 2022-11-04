@@ -1,0 +1,152 @@
+<style>
+  .blog-imgs-main{
+    width: 100%;
+    padding: 0;
+  }
+  .blog-img-container{
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+  }
+  .image-left{
+     width: {{ section.settings.image_size_left }}%;
+     padding-left: 0%;
+     
+  }
+
+  .left-side{
+    margin-left: {{ section.settings.image_move_left }}%;
+  }
+  .right-side{
+    margin-right: {{ section.settings.image_move_right }}%;
+  }
+  
+  .image-flex{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    
+    
+  }
+
+  .image-right{
+    width: {{ section.settings.image_size_right }}%;
+    padding-left: 0%;
+  }
+
+</style>
+
+<section class="blog-imgs-main">
+  <div class="blog-img-container">
+     {%- comment -%} image left  {%- endcomment -%}
+    <div class="image-flex left-side">
+        {%- if section.settings.blog_images_left -%}
+            <img class="image-left " src=" {{ section.settings.blog_images_left | img_url: 'grande' }} " alt="" width="" height="" loading="lazy">
+            {% if  section.settings.blog_text_left %}
+                <p class="para-flex"> {{ section.settings.blog_text_left }} </p>
+            {% endif %}
+         {%- endif -%}
+    </div>
+    <div class="image-flex right-side">
+        {% if section.settings.blog_images_right %}
+            <img class="image-right" src=" {{ section.settings.blog_images_right | img_url: 'grande' }} " alt="" width="" height="" loading="lazy">
+            {% if  section.settings.blog_text_right %}
+                <p class="para-flex" > {{ section.settings.blog_text_right }} </p>
+            {% endif %}
+         {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+    {
+        "name": "Blog Images",
+        "settings": [
+            {
+                "type": "image_picker",
+                "id": "blog_images_left",
+                "label": "Blog Images Left"
+                
+            },
+            {
+                "type": "image_picker",
+                "id": "blog_images_right",
+                "label": "Blog Images Right"
+                
+            },
+            {
+                "type": "text",
+                "id": "blog_text_left",
+                "label": "Blog Images Text left"
+                
+            },
+            {
+                "type": "text",
+                "id": "blog_text_right",
+                "label": "Blog Images Text right"
+                
+            },
+            //range for image size
+            {
+                "type": "range",
+                "id": "image_size_left",
+                "label": "Image Size left",
+                "min": 0,
+                "max": 100,
+                "unit": "%",
+                "step": 1,
+                "default": 60
+            },
+            //range for image size
+            {
+                "type": "range",
+                "id": "image_size_right",
+                "label": "Image Size right",
+                "min": 0,
+                "max": 100,
+                "unit": "%",
+                "step": 1,
+                "default": 60
+            },
+            
+            //image move left
+            {
+                "type": "range",
+                "id": "image_move_left",
+                "label": "Image Move left",
+                "min": 0,
+                "max": 100,
+                "unit": "%",
+                "step": 1,
+                "default": 0
+            },
+
+            //image move right
+            {
+                "type": "range",
+                "id": "image_move_right",
+                "label": "Image Move right",
+                "min": 0,
+                "max": 100,
+                "unit": "%",
+                "step": 1,
+                "default": 0
+            }
+            
+        ],
+        "presets": [
+      {
+        "category": "content",
+        "name": "Blog Images"
+      }
+    ]
+
+
+    }
+{% endschema %}
