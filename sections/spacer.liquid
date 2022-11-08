@@ -1,0 +1,83 @@
+<style>
+  .spacer {
+    background-color: {{section.settings.color}};
+    padding: {{ section.settings.padding }}px;
+    height: {{ section.settings.height }}px;
+    width: {{ section.settings.width }}%;
+    margin: 0 auto;
+  }
+</style>
+
+
+<section>
+  <div class="spacer">
+    
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Spacer",
+    "settings": [
+
+      {
+        "type": "range",
+        "id": "padding",
+        "label": "Padding",
+        "min": 0,
+        "max": 100,
+        "unit": "px",
+        "step": 1,
+        "default": 10
+      }, {
+        "type": "range",
+        "id": "height",
+        "label": "Height",
+        "min": 0,
+        "max": 500,
+        "unit": "px",
+        "step": 20,
+        "default": 20
+      }, {
+        "type": "range",
+        "id": "width",
+        "label": "Width",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "%",
+        "default": 100
+      },
+        //select color 
+        {
+        "type": "select",
+        "id": "color",
+        "options": [
+          {
+            "value": "#D6E282",
+            "label": "Light Yellow"
+          }, {
+            "value": "#fff",
+            "label": "white"
+          }, {
+            "value": "#BCE29E",
+            "label": "Light Green"
+          }, {
+            "value": "#E282D6",
+            "label": "Violate"
+          }
+        ],
+        "default": "#E282D6",
+        "label": "spacer background color"
+      }
+
+    ],
+    "presets": [
+      {
+        "category": "content",
+        "name": "Spacer"
+      }
+    ]
+
+  }
+{% endschema %}

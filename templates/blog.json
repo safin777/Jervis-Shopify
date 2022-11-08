@@ -20,7 +20,16 @@
     "blog-image": {
       "type": "blog-image",
       "settings": {}
+    },
+    "blog-spacer": {
+      "type": "spacer",
+      "settings": {}
+    },
+    "blog-collage-image" : {
+      "type": "blog-collage-image",
+      "settings": {}
     }
+    
   },
-  "order": ["main", "blog-posts", "blog-image"]
+  "order": ["main", "blog-posts", "blog-image","blog-pacer","blog-collage-image"]
 }
