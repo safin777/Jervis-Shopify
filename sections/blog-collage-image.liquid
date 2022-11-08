@@ -1,40 +1,66 @@
 <style>
-  .collage-section {
+  .collage-section-{{ section.id }}{
     background-color: {{ section.settings.main_color}};
     padding: {{ section.settings.padding }}px;
     width: {{ section.settings.width }}%;
   }
 
-  .collage-container {
+  .collage-container-{{ section.id }}{
     height: auto;
-    display: inline-flex;
+    display: flex;
     justify-content: center;
-    flex-wrap: wrap;
-    flex-direction: {{ section.settings.swap_image }};
+   /* flex-wrap: wrap; */
+    text-align: {{ section.settings.text_align }};
+    gap: {{ section.settings.image_gap }}px;
+    /* flex-direction: {{ section.settings.swap_image }}; */
   }
 
-  .left-wrapper img {
-    width: {{ section.settings.left_image_width }}%;
-    border: {{ section.settings.left_image_border_width }}px solid {{ section.settings.left_border_color }};
+  .left-wrapper-{{ section.id }}img {
+    width: {{ section.settings.left_image_width }}px;
+    border: {{ section.settings.left_image_border_width }}px solid{{ section.settings.left_border_color }};
+  }
+
+  .right-wrapper-{{ section.id }}img {
+    width: {{ section.settings.right_image_width }}px;
+    border: {{ section.settings.right_image_border_width }}px solid{{ section.settings.right_border_color }};
   }
 </style>
 
-<section class="collage-section">
-  <div class="collage-container">
+<section class="collage-section-{{ section.id }}">
+  <div class="collage-container-{{ section.id }}">
 
-      <div class="left-wrapper">
-        {%- if section.settings.image_left -%}
-          <img src=" {{ section.settings.image_left | img_url: 'grande' }} " alt="" width="" height="" loading="lazy">
-          <p>Caption one</p>
-        {%- endif -%}
-      </div>
-     
-      <div class="right-wrapper">
-        {% if section.settings.image_right %}
-          <img src= " {{ section.settings.image_right | img_url: 'grande' }} " alt="" width="" height="" loading="lazy">
-          <p>Caption two</p>
+    <div class="left-wrapper-{{ section.id }}">
+      {%- if section.settings.image_left -%}
+        <img src=" {{ section.settings.image_left | img_url: 'grande' }} " alt="" width="" height="" loading="lazy">
+        {% if section.settings.caption_left %}
+          <p>
+            {{ section.settings.caption_left }}
+          </p>
         {% endif %}
-      </div>
+      {%- endif -%}
+
+      {%- if section.settings.left_text -%}
+        <p class="side-text-left-{{ section.id}}">
+          {{ section.settings.left_text }}
+        </p>
+      {%- endif -%}
+    </div>
+
+    <div class="right-wrapper-{{ section.id }}">
+      {% if section.settings.image_right %}
+        <img src=" {{ section.settings.image_right | img_url: 'grande' }} " alt="" width="" height="" loading="lazy">
+        {% if section.settings.caption_right %}
+          <p class="side-text-right-{{ section.id}}" >
+            {{ section.settings.caption_right }}
+          </p>
+        {% endif %}
+      {% endif %}
+
+      {%- if section.settings.right_text -%}
+        <p>
+          {{ section.settings.right_text }}</p>
+      {%- endif -%}
+    </div>
   </div>
 </section>
 
@@ -51,15 +77,16 @@
         "label": "Image Left"
       },
 
-    //left image width
+// left image width
       {
         "type": "range",
         "id": "left_image_width",
         "label": "Left Image Width",
         "min": 0,
-        "max": 1200,
+        "max": 700,
+        "unit": "px",
         "step": 20,
-        "default": 600
+        "default": 500
       },
 
 // left wrapper color select
@@ -103,11 +130,65 @@
         "label": "left image border width"
       },
 
+// image move left 
 // image right
       {
         "type": "image_picker",
         "id": "image_right",
         "label": "Image Right"
+      },
+
+// right image width
+      {
+        "type": "range",
+        "id": "right_image_width",
+        "label": "Right Image Width",
+        "min": 0,
+        "max": 700,
+        "unit": "px",
+        "step": 20,
+        "default": 500
+      },
+
+// right wrapper color select
+      {
+        "type": "select",
+        "id": "right_border_color",
+        "options": [
+          {
+            "value": "#D6E282",
+            "label": "Light Yellow"
+          },
+          {
+            "value": "#fff",
+            "label": "white"
+          },
+          {
+            "value": "#BCE29E",
+            "label": "Light Green"
+          },
+          {
+            "value": "#E282D6",
+            "label": "Violate"
+          }, {
+            "value": "#000",
+            "label": "Black"
+          }
+        ],
+        "default": "#fff",
+        "label": "Right image border color"
+      },
+
+// right image border width 
+      {
+        "type": "range",
+        "id": "right_image_border_width",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "default": 0,
+        "label": "Right image border width"
       }, {
         "type": "range",
         "id": "padding",
@@ -126,6 +207,67 @@
         "step": 2,
         "unit": "%",
         "default": 100
+      },
+
+// caption left
+      {
+        "type": "text",
+        "id": "caption_left",
+        "label": "Caption Left"
+      },
+
+// caption right
+      {
+        "type": "text",
+        "id": "caption_right",
+        "label": "Caption Right"
+      },
+
+// Caption text align
+      {
+        "type": "select",
+        "id": "text_align",
+        "label": "Caption Text Align",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          }, {
+            "value": "center",
+            "label": "Center"
+          }, {
+            "value": "right",
+            "label": "Right"
+          }
+        ],
+        "default": "center"
+      },
+
+
+// image gap
+      {
+        "type": "range",
+        "id": "image_gap",
+        "label": "Image Gap",
+        "min": 0,
+        "max": 50,
+        "step": 5,
+        "unit": "px",
+        "default": 0
+      },
+
+// left text
+      {
+        "type": "textarea",
+        "id": "left_text",
+        "label": "Left side Text"
+      },
+
+// right side text 
+      {
+        "type": "textarea",
+        "id": "right_text",
+        "label": "Right side Text"
       },
 
 // select color 
@@ -155,25 +297,25 @@
         ],
         "default": "#E282D6",
         "label": "background color"
-      },
+      }
 
 // swap image 
-      {
-        "type": "select",
-        "id": "swap_image",
-        "options": [
-          {
-            "value": "row-reverse",
-            "label": "reverse"
-          }, {
-            "value": "row",
-            "label": "normal"
-          }
+// {
+// "type": "select",
+// "id": "swap_image",
+// "options": [
+//     {
+//       "value": "row-reverse",
+//       "label": "reverse"
+//     }, {
+//       "value": "row",
+//       "label": "normal"
+//     }
 
-        ],
-        "default": "row",
-        "label": "Swap image "
-      }
+// ],
+// "default": "row",
+// "label": "Swap image "
+// }
 
     ],
     "presets": [
